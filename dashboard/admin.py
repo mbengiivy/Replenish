@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product,Order
 from django.contrib.auth.models import Group
 
 
@@ -12,3 +12,4 @@ class ProductAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 #admin.site.unregister(Group)
+admin.site.register(Order)

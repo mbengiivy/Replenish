@@ -1,0 +1,24 @@
+{% extends "partials/base.html" %}
+{% block title %}REGISTER PAGE{% endblock %}
+{% load crispy_forms_tags %}
+
+<!--------USER REGISTRATION FOR NEW USERS-->
+{% block content%}
+
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="border p-3 bg-white">
+            <h4>Registration Page</h4>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                <!----CSRF cross site request forgery(security feature)-->
+                {{ form|crispy }}
+                <input class="btn btn-success" type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock%}
