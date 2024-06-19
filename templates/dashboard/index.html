@@ -2,5 +2,11 @@
 {% block title%}Home page{%endblock%}
 
 {% block content%}
+
+{% if user.is_authenticated %}
+<!-----and if user.is_staff and if user.is_superuser-->
 {% include 'partials/topnav.html' %}
+{% else %}
+{% include 'dashboard/staff_index.html' %}
+{% endif %}
 {% endblock%}

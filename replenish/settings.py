@@ -130,6 +130,10 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = (BASE_DIR/"asert")
 
+MEDIA_ROOT = (BASE_DIR/'media')
+
+MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = 'dashboard-index'
 
 LOGOUT_REDIRECT_URL = 'user-logout'
