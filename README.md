@@ -7,8 +7,16 @@ Welcome to Replenish, a web application to suit your small business needs
 
 ## FUNCTIONALITIES:
 - Storing your product list on a database
+  ![Screenshot of the application](replenish-products.png)
+
 - Storing your staff members details on a database
+
+  ![Screenshot of the application](replenish-staff.png)
+
 - Keeping track of your product percentage and orders
+
+  ![Screenshot of the application](replenish-orders.png)
+
 - Allowing staff members to make requests to the admin to get some products
 
 
