@@ -1,6 +1,8 @@
-body{
-    background: rgb(230, 227, 227);
+
+.text-info {
+    color: #17a2b8 !important;
 }
+
 .my-card:hover{
     transform: scale(1.1);
     transition: 0.2s ease-in-out;

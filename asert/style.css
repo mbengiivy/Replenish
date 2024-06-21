@@ -1,3 +1,49 @@
+/* Override primary color */
+.bg-primary {
+    background-color: #30e0a5 !important; /* Custom blue */
+  }
+  
+  .text-primary {
+    color: #ffffff !important; /* Custom blue */
+  }
+
+  .text-secondary {
+    color: #2ecc71 !important; /* Custom green */
+}
+
+/* Override other Bootstrap colors as needed */
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.text-success {
+    color: #28a745 !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.text-info {
+    color: #17a2b8 !important;
+}
+
 body{
     background: rgb(230, 227, 227);
 }
