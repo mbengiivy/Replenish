@@ -3,7 +3,7 @@
 
 Welcome to Replenish, a web application to suit your small business needs
 
-![Screenshot of the application](/replenish-homepage)
+![Screenshot of the application](/replenish-homepage.png)
 
 ## FUNCTIONALITIES:
 - Storing your product list on a database
