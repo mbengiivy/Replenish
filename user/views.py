@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
 
 def register(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data.get('username')
+            messages.success(request,f'Account has been successfully created for {username}. Continue to log in')
             form.save()
             return redirect('user-login')
     else:

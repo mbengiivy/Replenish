@@ -5,27 +5,29 @@
 {% include 'partials/topnav.html' %}
 <div class="row my-4">
     <div class="col-md-4"></div>
-    <div class="col-md-8">
-        <table class="table bg-white">
-            <thead class="bg-info text-white">
-                <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Ordered by</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in order %}
-                <tr>
-                    <td>{{ order.name }}</td>
-                    <td>{{ order.name.category }}</td>
-                    <td>{{ order.order_quantity }}</td>
-                    <td>{{ order.customer.username }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<table class="table bg-white">
+    <thead class="bg-info text-white">
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Ordered by</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.product }}</td>
+            <td>{{ order.product.category }}</td>
+            <td>{{ order.order_quantity }}</td>
+            <td>{{ order.staff.username }}</td>
+            <td>{{ order.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
     </div>
 </div>
 
