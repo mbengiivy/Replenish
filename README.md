@@ -28,3 +28,7 @@ Administrator privileges differ such that the business owner is considered the a
 They also are able to access profile information for the staff members
 
 This system is user friendly and very understanding
+
+For sampling purposes, the administrative account details are as below:
+Username: admin
+Password: asdqwe!23
