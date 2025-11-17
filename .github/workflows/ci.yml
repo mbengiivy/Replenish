@@ -1,0 +1,110 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  backend-test:
+    name: Backend (Django) Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_DB: replen_db
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          pip install -r requirements.txt
+
+      - name: Run migrations
+        run: |
+          cd backend
+          python manage.py migrate
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          python manage.py test
+
+  frontend-build:
+    name: Frontend (React) Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install & Build
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+  docker-build:
+    name: Build & Push Docker Images
+    needs: [backend-test, frontend-build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # Ensure DOCKERHUB_USERNAME and DOCKERHUB_TOKEN are set as repository secrets for Docker Hub authentication
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build backend image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/replen-backend:latest ./backend
+
+      - name: Build frontend image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/replen-frontend:latest ./frontend
+
+      - name: Push images
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/replen-backend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/replen-frontend:latest
+
+  deploy-to-render:
+    name: Deploy to Render
+    needs: docker-build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: |
+          # Trigger a deployment on Render using the deploy hook URL stored in the repository secret 'RENDER_DEPLOY_HOOK'.
+          # Make sure to add 'RENDER_DEPLOY_HOOK' as a secret in your GitHub repository settings under Settings > Secrets and variables > Actions.
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
