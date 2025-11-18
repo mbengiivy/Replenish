@@ -10,7 +10,11 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJANGO_SECRET', 'dev-secret')
 DEBUG = os.getenv('DEBUG', '1') == '1'
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['*',
+    "replenish.onrender.com",
+    "replenish-backend.onrender.com"
+    ]
 
 
 INSTALLED_APPS = [
@@ -23,7 +27,6 @@ INSTALLED_APPS = [
 'rest_framework',
 'corsheaders',
 'api',
-'rest_framework',
 'rest_framework_simplejwt',
 ]
 
@@ -49,7 +52,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
-ROOT_URLCONF = 'replenish_backend.urls'
+ROOT_URLCONF = 'replenish.urls'
 
 
 TEMPLATES = [
@@ -94,7 +97,13 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://replenish.onrender.com",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://replenish.onrender.com",
+]
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
