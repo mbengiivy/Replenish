@@ -72,7 +72,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'replenish_backend.wsgi.application'
+WSGI_APPLICATION = 'replenish.wsgi.application'
 
 
 # Use sqlite for quick start; update DATABASE_URL for production
