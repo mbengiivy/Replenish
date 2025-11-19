@@ -28,7 +28,7 @@ load();
 }, []);
 
 
-if (loading) return <div className="p-8">Loading dashboard...</div>
+// if (loading) return <div className="p-8">Loading dashboard...</div>
 
 
 return (
